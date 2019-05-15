@@ -14,6 +14,7 @@ namespace VisualMatchingPairs
     {
         Label firstClicked = null;
         Label secondClicked = null;
+        int revealedIconCount = 0;
         Random random = new Random();
         List<string> icons = new List<string>()
         {
@@ -80,14 +81,14 @@ namespace VisualMatchingPairs
                     clickedLabel.ForeColor = Color.Black;
                     if (firstClicked.Text == secondClicked.Text)
                     {
+                        revealedIconCount += 2;
                         firstClicked = null;
                         secondClicked = null;
+                        CheckForWin();
                         return;
                     }
 
                     timer1.Start();
-
-
 
                 }
                 
@@ -101,6 +102,15 @@ namespace VisualMatchingPairs
             secondClicked.ForeColor = secondClicked.BackColor;
             firstClicked = null;
             secondClicked = null;
+        }
+
+        private void CheckForWin()
+        {
+            if(revealedIconCount == 16)
+            {
+                MessageBox.Show("You matched all the icons, well done!", "Congratulations!");
+                Close();
+            }
         }
     }
 }
